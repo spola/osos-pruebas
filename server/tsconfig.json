@@ -16,6 +16,14 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "@aaa/common-dto": [
+        "libs/common-dto/src"
+      ],
+      "@aaa/common-dto/*": [
+        "libs/common-dto/src/*"
+      ]
+    }
   }
 }

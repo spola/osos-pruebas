@@ -3,6 +3,27 @@
   "collection": "@nestjs/schematics",
   "sourceRoot": "src",
   "compilerOptions": {
-    "deleteOutDir": true
+    "deleteOutDir": true,
+    "plugins": [
+      {
+        "name": "@nestjs/swagger",
+        "options": {
+          "classValidatorShim": true,
+          "introspectComments": true
+        }
+      }
+    ],
+    "webpack": true
+  },
+  "projects": {
+    "common-dto": {
+      "type": "library",
+      "root": "libs/common-dto",
+      "entryFile": "index",
+      "sourceRoot": "libs/common-dto/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/common-dto/tsconfig.lib.json"
+      }
+    }
   }
 }
