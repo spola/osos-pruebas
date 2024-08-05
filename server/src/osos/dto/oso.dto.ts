@@ -1,17 +1,11 @@
-export type MovementType = "load" | "unload" | "movement" | "charge";
+import { Oso } from "@aaa/common-dto";
+import { IsString } from "class-validator";
 
-export class Oso {
-    constructor(attr: Partial<Oso>) {
-        Object.assign(this, attr)
-    }
-
-    id: number;
-    ubicacion: string;
-    inicio: Date;
-    tipo: MovementType;
-    ilpn: number;
-    activo: boolean;
-
-    machineId: string;
-    ip: string;
+export class OsoDTO extends Oso {
+    /**
+     * La hora de inicio a partir de la fecha de inicio
+     * @example 19:40
+     */
+    @IsString()
+    horaInicio?: string;
 }

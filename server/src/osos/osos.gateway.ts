@@ -1,7 +1,7 @@
+import { Oso } from '@aaa/common-dto';
 import { Logger } from '@nestjs/common';
 import { SubscribeMessage, WebSocketGateway, WebSocketServer } from '@nestjs/websockets';
 import { Server } from 'socket.io';
-import { Oso } from './dto/oso.dto';
 
 const formatter = new Intl.DateTimeFormat('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false });
 
