@@ -19,6 +19,10 @@ export class OsosService {
     return osos.find(v => v.activo);
   }
 
+  public findByMachineId(id: string): Oso | undefined {
+    return osos.find((oso) => oso.machineId == id);
+  }
+
   public findOso(id: number): Oso | undefined {
     return osos.find((oso) => oso.id == id);
   }

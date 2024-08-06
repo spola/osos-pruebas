@@ -4,9 +4,10 @@ import { OsosService } from './osos.service';
 import { OsosController } from './osos.controller';
 
 @Module({
-  imports:[
+  imports: [
   ],
+  exports: [OsosService],
   providers: [OsosGateway, OsosService],
   controllers: [OsosController]
 })
-export class OsosModule {}
+export class OsosModule { }
