@@ -1,5 +1,6 @@
-import { Oso } from '@aaa/common-dto';
+import { ACCION_ASIGNADA, AccionAsignadaEvent, Oso, TAREA_CREADA, TareaCreadaEvent } from '@aaa/common-dto';
 import { Logger } from '@nestjs/common';
+import { OnEvent } from '@nestjs/event-emitter';
 import { SubscribeMessage, WebSocketGateway, WebSocketServer } from '@nestjs/websockets';
 import { Server } from 'socket.io';
 
@@ -22,5 +23,24 @@ export class OsosGateway {
       ...oso,
       inicio: formatter.format(oso.inicio),
     });
+  }
+
+  @OnEvent(ACCION_ASIGNADA)
+  public onAccionAsignada(payload: AccionAsignadaEvent) {
+    this.logger.debug(`onAccionAsignada ${payload.oso.id}`);
+    this.server.emit("accion-asignada", {
+      tarea: payload.tarea
+    });
+
+    this.server.emit("oso-updated", {
+      ...payload.oso,
+      inicio: formatter.format(payload.oso.inicio),
+    });
+  }
+
+  @OnEvent(TAREA_CREADA)
+  public onTareaCreada(payload: TareaCreadaEvent) {
+    this.logger.debug(`onTareaCreada ${payload.tarea.codigo}`);
+    this.server.emit("accion-creada", payload);
   }
 }
