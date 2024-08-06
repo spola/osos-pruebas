@@ -28,6 +28,9 @@ export function Oso({ data }) {
                     <Text as="div" size="2" color="gray">
                         {data.ilpn}
                     </Text>
+                    <Text as="div" size="1" color="gray">
+                        {data.machineId}
+                    </Text>
                 </Box>
             </Card>
         </Box>

@@ -6,10 +6,10 @@ import { io } from "socket.io-client";
 
 import { Oso } from './Oso';
 
-const socket = io('http://localhost:4000', { autoConnect: false });
+// const socket = io('http://localhost:4000', { autoConnect: false });
 
 
-export function GrillaOsos() {
+export function GrillaOsos({socket}) {
 
     const [listaOsos, updateListaOsos] = useImmer([]);
 
@@ -37,18 +37,6 @@ export function GrillaOsos() {
                 })
             });
 
-        console.info("pasando por acá");
-
-        socket.connect();
-
-        socket.on("connect", () => {
-            console.log("Socket connected");
-        });
-
-        socket.on("disconnect", () => {
-            console.log("Socket disconnected");
-        });
-
         socket.on("oso-updated", (osoMessage) => {
             console.log("New message added", osoMessage);
             handleOsoUpdated(osoMessage);
@@ -56,14 +44,12 @@ export function GrillaOsos() {
         });
 
         return () => {
-            socket.off("connect");
-            socket.off("disconnect");
             socket.off("oso-updated");
         };
     }, []);
 
     return (
-        <Grid columns={{ initial: '4', md: '2' }} gap="6" width="auto">
+        <Grid columns={{ initial: '4', md: '4' }} gap="6" width="auto">
             {listaOsos.map((o, i) => (<Oso key={o.id} data={o}></Oso>))}
         </Grid>
     )
