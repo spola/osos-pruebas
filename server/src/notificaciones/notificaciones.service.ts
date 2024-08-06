@@ -5,6 +5,7 @@ import { Notificacion } from './entities/notificacione.entity';
 import { randomUUID } from 'crypto';
 import { OsosService } from 'src/osos/osos.service';
 import { EstadoOso } from '@aaa/common-dto';
+import { EventEmitter2 } from '@nestjs/event-emitter';
 
 let notificaciones = [];
 
@@ -15,7 +16,8 @@ export class NotificacionesService {
 
   constructor(
     private readonly ososService: OsosService,
-  ){}
+    private eventEmitter: EventEmitter2
+  ) { }
 
   async create(createNotificacioneDto: CreateNotificacioneDTO): Promise<Notificacion> {
     this.logger.log("llegó una notificación " + JSON.stringify(createNotificacioneDto));
@@ -44,6 +46,11 @@ export class NotificacionesService {
 
     // (4) Quedó libre
     // (5) Notificar liberación
+
+    this.logger.debug("Emitiendo el evento");
+    this.eventEmitter.emitAsync("oso.liberado", {
+      id: oso.id
+    });
 
     return notificacion;
   }
