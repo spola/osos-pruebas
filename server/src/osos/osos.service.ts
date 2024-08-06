@@ -1,4 +1,4 @@
-import { Oso } from '@aaa/common-dto';
+import { EstadoOso, Oso } from '@aaa/common-dto';
 import { Injectable, Logger } from '@nestjs/common';
 import { createListOsos } from './data/create-osos.faker';
 import { loadOsos } from './data/load-osos.fn';
@@ -25,6 +25,15 @@ export class OsosService {
 
   public findOso(id: number): Oso | undefined {
     return osos.find((oso) => oso.id == id);
+  }
+
+  public reservarOso(id: number): Oso | undefined {
+    let oso = this.findOso(id);
+    if (!!oso) {
+      oso.estado = EstadoOso.Reserved;
+    }
+
+    return oso;
   }
 
   public getAll(): Oso[] {
