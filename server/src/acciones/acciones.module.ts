@@ -5,13 +5,14 @@ import { ScheduleModule } from '@nestjs/schedule';
 
 
 @Module({
-  imports:[
+  exports: [AccionesService],
+  imports: [
     ScheduleModule.forRoot()
   ],
   controllers: [AccionesController],
   providers: [AccionesService],
 })
-export class AccionesModule {}
+export class AccionesModule { }
 
 
 /*
