@@ -3,5 +3,6 @@ export enum EstadoOso {
   Moving = 'moving',
   Load = 'load',
   Unload = 'unload',
-  Charging = 'charging'
+  Charging = 'charging',
+  Reserved = 'reserved'
 }
