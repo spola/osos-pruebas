@@ -8,19 +8,41 @@ import { Oso } from './Oso';
 
 // const socket = io('http://localhost:4000', { autoConnect: false });
 
+const notificar = (oso) => {
+    let res = fetch("http://localhost:4000/notificaciones", {
+        method: "post", 
+        headers: {
+            'Content-Type': "application/json; charset=utf-8"
+        },
+        body: JSON.stringify({
+            timestamp: new Date(),
+            machine_id: oso.machineId,
+            notification_type: "movement", //oso.accion.movimiento,
+            notification_data: { //TODO Mandando cualquier cosa
+                aisle: 365,
+                lpn: "987654321",
+                location: "301-62-1-2"
+            }
+        })
+    }).then(r => r.json());
 
-export function GrillaOsos({socket}) {
+    return res;
+}
+
+
+export function GrillaOsos({ socket }) {
 
     const [listaOsos, updateListaOsos] = useImmer([]);
 
     function handleOsoUpdated(osoMessage) {
         updateListaOsos(draft => {
             const oso = draft.find(a =>
-                a.id === osoMessage.id
+                a.id === osoMessage.oso.id
             );
             if (oso != null) {
 
-                Object.assign(oso, osoMessage);
+                Object.assign(oso, osoMessage.oso);
+                oso.accion = osoMessage.accion;
             } else {
                 console.error("Elemento no encontrado");
             }
@@ -41,6 +63,11 @@ export function GrillaOsos({socket}) {
             console.log("New message added", osoMessage);
             handleOsoUpdated(osoMessage);
             //setMessages((previousMessages) => [...previousMessages, newMessage]);
+
+            setTimeout(() => {
+                console.info("Notificar cambio " + osoMessage.oso.id);
+                notificar(osoMessage.oso);
+            }, 5000);
         });
 
         return () => {

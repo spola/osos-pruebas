@@ -1,0 +1,14 @@
+###  (movement, load, unload)
+POST http://localhost:4000/notificaciones 
+Content-Type: application/json
+
+{
+  "timestamp": "2024-08-06T07:15:31.042Z",
+  "machine_id": "1246dc44-6230-4a69-a3b5-ef13814aa924",
+  "notification_type": "movement",
+  "notification_data": {
+    "aisle": 365,
+    "lpn": "987654321",
+    "location": "301-62-1-2"
+  }
+}

@@ -10,6 +10,8 @@ import {
   IsString,
 } from 'class-validator';
 import { EstadoOso } from './estado-oso.enum';
+import { Accion } from './accion.dto';
+import { Type } from 'class-transformer';
 
 
 
@@ -34,4 +36,7 @@ export class Oso {
 
   @IsDate()
   inicio: Date;
+
+  @Type(() => Accion)
+  accion?: Accion;
 }

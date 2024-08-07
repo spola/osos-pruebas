@@ -48,38 +48,38 @@ export class AccionesService {
             this.asignarOso(tarea.id, oso);
         }
 
-        let movimiento: EstadoOso;
-        if (tarea.etapa == 1) movimiento = EstadoOso.Moving;
-        if (tarea.etapa == 2) movimiento = EstadoOso.Load;
-        if (tarea.etapa == 3) movimiento = EstadoOso.Moving;
-        if (tarea.etapa == 4) movimiento = EstadoOso.Unload;
+        let accion = this.asignarAccionOso(tarea, oso);
 
         return {
             tarea: tarea,
-            accion: new Accion({
-                movimiento: movimiento,
-                osoId: oso.id,
-                tarea: tarea.codigo,
-                ubicacion: (tarea.etapa == 1 || tarea.etapa == 2) ? tarea.origen : tarea.destino
-            })
+            accion: accion
         };
     }
 
     asignarOsoTarea(tarea: TareaDTO, oso: Oso): Accion {
         this.asignarOso(tarea.codigo, oso);
 
+        return this.asignarAccionOso(tarea, oso);
+    }
+
+    private asignarAccionOso(tarea: TareaDTO, oso: Oso) {
+
         let movimiento: EstadoOso;
         if (tarea.etapa == 1) movimiento = EstadoOso.Moving;
-        if (tarea.etapa == 2) movimiento = EstadoOso.Load;
-        if (tarea.etapa == 3) movimiento = EstadoOso.Moving;
-        if (tarea.etapa == 4) movimiento = EstadoOso.Unload;
+        if (tarea.etapa == 2) movimiento = EstadoOso.Loading;
+        // if (tarea.etapa == 3) movimiento = EstadoOso.Movement;
+        if (tarea.etapa == 3) movimiento = EstadoOso.Unloading;
 
-        return new Accion({
+        let accion = new Accion({
             movimiento: movimiento,
             osoId: oso.id,
             tarea: tarea.codigo,
             ubicacion: (tarea.etapa == 1 || tarea.etapa == 2) ? tarea.origen : tarea.destino
         });
+
+        oso.accion = accion;
+
+        return accion;
     }
 
     private asignarOso(tareaId: string, oso: Oso) {

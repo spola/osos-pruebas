@@ -33,8 +33,11 @@ export class OsosGateway {
     });
 
     this.server.emit("oso-updated", {
-      ...payload.oso,
-      inicio: formatter.format(payload.oso.inicio),
+      oso: {
+        ...payload.oso,
+        horaInicio: formatter.format(payload.oso.inicio),
+      },
+      accion: payload.accion
     });
   }
 
