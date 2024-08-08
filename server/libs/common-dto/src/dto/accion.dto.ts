@@ -15,4 +15,9 @@ export class Accion {
     ubicacion?: string;
 
     osoId: number;
+
+    aisle:number;
+
+    lpn: string;
+
 }

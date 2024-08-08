@@ -17,11 +17,11 @@ const notificar = (oso) => {
         body: JSON.stringify({
             timestamp: new Date(),
             machine_id: oso.machineId,
-            notification_type: "movement", //oso.accion.movimiento,
-            notification_data: { //TODO Mandando cualquier cosa
-                aisle: 365,
-                lpn: "987654321",
-                location: "301-62-1-2"
+            notification_type: oso.accion.movimiento,
+            notification_data: {
+                aisle: oso.accion.aisle,
+                lpn: oso.accion.lpn,
+                location: oso.accion.ubicacion
             }
         })
     }).then(r => r.json());
@@ -64,10 +64,12 @@ export function GrillaOsos({ socket }) {
             handleOsoUpdated(osoMessage);
             //setMessages((previousMessages) => [...previousMessages, newMessage]);
 
-            setTimeout(() => {
-                console.info("Notificar cambio " + osoMessage.oso.id);
-                notificar(osoMessage.oso);
-            }, 5000);
+            if(!!osoMessage.accion) {
+                setTimeout(() => {
+                    console.info("Notificar cambio " + osoMessage.oso.id);
+                    notificar(osoMessage.oso);
+                }, 5000);
+            }
         });
 
         return () => {

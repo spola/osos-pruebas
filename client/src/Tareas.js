@@ -64,15 +64,22 @@ export function Tareas({ socket }) {
             handleTareaUpdated(accionMessage.tarea);
             //setMessages((previousMessages) => [...previousMessages, newMessage]);
         });
-        socket.on("accion-creada", (accionMessage) => {
+        socket.on("tarea-creada", (accionMessage) => {
             console.log("New acción creada", accionMessage);
+            handleTareaUpdated(accionMessage.tarea);
+            //setMessages((previousMessages) => [...previousMessages, newMessage]);
+        });
+
+        socket.on("tarea-terminada", (accionMessage) => {
+            console.log("tarea terminada", accionMessage);
             handleTareaUpdated(accionMessage.tarea);
             //setMessages((previousMessages) => [...previousMessages, newMessage]);
         });
 
         return () => {
             socket.off("accion-asignada");
-            socket.off("accion-creada");
+            socket.off("tarea-creada");
+            socket.off("tarea-creada");
         };
     }, []);
     return (

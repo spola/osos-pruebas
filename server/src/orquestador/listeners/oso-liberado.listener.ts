@@ -1,9 +1,8 @@
 import { Injectable, Logger } from "@nestjs/common";
 import { EventEmitter2, OnEvent } from "@nestjs/event-emitter";
-import { OsoLiberadoEvent } from "../events/oso-liberado.event";
 import { OsosService } from "../../osos/osos.service";
 import { AccionesService } from "../../acciones/acciones.service";
-import { ACCION_ASIGNADA, AccionAsignadaEvent } from "@aaa/common-dto";
+import { ACCION_ASIGNADA, AccionAsignadaEvent, OSO_LIBERADO, OsoLiberadoEvent } from "@aaa/common-dto";
 
 @Injectable()
 export class OsoLiberadoListener {
@@ -16,7 +15,7 @@ export class OsoLiberadoListener {
         private readonly eventEmitter: EventEmitter2
     ) { }
 
-    @OnEvent("oso.liberado")
+    @OnEvent(OSO_LIBERADO)
     handleOrderCreatedEvent(payload: OsoLiberadoEvent) {
         // handle and process "OrderCreatedEvent" event
 

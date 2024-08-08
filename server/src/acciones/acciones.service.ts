@@ -3,7 +3,7 @@ import { Cron, CronExpression } from '@nestjs/schedule';
 import { EstadoTarea, TareaDTO } from '../../libs/common-dto/src/dto/tarea.dto';
 import { createFakeTask } from './data/create-task.fn';
 import { EventEmitter2 } from '@nestjs/event-emitter';
-import { Oso, TAREA_CREADA, TareaCreadaEvent } from '@aaa/common-dto';
+import { Oso, TAREA_CREADA, TAREA_TERMINADA, TareaCreadaEvent } from '@aaa/common-dto';
 import { Accion } from '@aaa/common-dto';
 import { EstadoOso } from '@aaa/common-dto';
 
@@ -35,15 +35,33 @@ export class AccionesService {
         } as TareaCreadaEvent)
     }
 
-    siguienteAccion(oso: Oso): { tarea: TareaDTO, accion: Accion } {
+    siguienteAccion(oso: Oso): { tarea?: TareaDTO, accion?: Accion } {
         let tarea = asignaciones[oso.id];
+
+        //Si tiene una tarea asignada, entonces la cambiamos de etapa y evaluamos si se terminó
         if (!!tarea) {
             tarea.etapa++;
-        } else {
+
+            if (tarea.etapa > 3) {
+                this.terminarTarea(oso, tarea);
+                tarea = null;
+            }
+        }
+
+        //Como en el if anterior la tarea podría marcarse nula, 
+        //entonces se pregunta nuevamente
+        if (!tarea) {
             tarea = this.siguienteTareaDisponible();
-            if (!tarea) return;
+            if (!tarea) {
 
+                // TODO La lógica de cuando dejarlo disponible tengo que revisarla
+                oso.estado = EstadoOso.Idle;
 
+                return {
+                    tarea: null,
+                    accion: null
+                };
+            }
 
             this.asignarOso(tarea.id, oso);
         }
@@ -74,7 +92,9 @@ export class AccionesService {
             movimiento: movimiento,
             osoId: oso.id,
             tarea: tarea.codigo,
-            ubicacion: (tarea.etapa == 1 || tarea.etapa == 2) ? tarea.origen : tarea.destino
+            ubicacion: (tarea.etapa == 1 || tarea.etapa == 2) ? tarea.origen : tarea.destino,
+            lpn: tarea.pln,
+            aisle: +(tarea.pln.substring(0, tarea.pln.indexOf('.')))
         });
 
         oso.accion = accion;
@@ -96,6 +116,21 @@ export class AccionesService {
 
     siguienteTareaDisponible(): TareaDTO | undefined {
         return tareas.find(t => t.estado == EstadoTarea.Ingresado);
+    }
+
+    terminarTarea(oso: Oso, tarea: TareaDTO): void {
+        tarea.estado = EstadoTarea.Terminado;
+        oso.accion = null;
+        oso.inicio = null;
+        if (oso.estado != EstadoOso.Reserved) {
+            oso.estado = EstadoOso.Idle;
+        }
+
+        delete asignaciones[oso.id];
+
+        this.eventEmitter.emitAsync(TAREA_TERMINADA, {
+            tarea: tarea
+        } as TareaCreadaEvent)
     }
 
     public getAll(): TareaDTO[] {

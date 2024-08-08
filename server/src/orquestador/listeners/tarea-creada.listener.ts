@@ -1,6 +1,5 @@
 import { Injectable, Logger } from "@nestjs/common";
 import { EventEmitter2, OnEvent } from "@nestjs/event-emitter";
-import { OsoLiberadoEvent } from "../events/oso-liberado.event";
 import { OsosService } from "../../osos/osos.service";
 import { AccionesService } from "../../acciones/acciones.service";
 import { ACCION_ASIGNADA, AccionAsignadaEvent, TAREA_CREADA, TareaCreadaEvent } from "@aaa/common-dto";

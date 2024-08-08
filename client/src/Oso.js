@@ -1,17 +1,21 @@
 import { Box, Card, Flex, Avatar, Text, Separator, DataList } from "@radix-ui/themes";
 import { FaceIcon, ImageIcon, SunIcon, BoxIcon, EnterIcon, ExitIcon, CubeIcon, LightningBoltIcon, ExclamationTriangleIcon, GearIcon, DoubleArrowRightIcon } from '@radix-ui/react-icons'
 
-const icon = (accion, activo) => {
+const icon = (accion, data) => {
 
-    if(!activo) return (<GearIcon/>);
+    if(!data.activo) {
+        if(data.estado == "charging") return (<><LightningBoltIcon /></>);
+        return (<GearIcon/>);
+    }
 
     if (!accion) return (<></>);
 
     let movimiento = accion.movimiento;
 
-    if (movimiento == "load") return (<><EnterIcon /><CubeIcon /></>);
-    if (movimiento == "unload") return (<><CubeIcon /><ExitIcon /></>);
+    if (movimiento == "loading") return (<><EnterIcon /><CubeIcon /></>);
+    if (movimiento == "unloading") return (<><CubeIcon /><ExitIcon /></>);
     if (movimiento == "moving") return (<><DoubleArrowRightIcon /></>);
+    if (movimiento == "charging") return (<><LightningBoltIcon /></>);
 
     return (<></>);
 }
@@ -25,7 +29,7 @@ export function Oso({ data }) {
             <Card variant={data.activo ? "surface" : "ghost"}>
                 <Flex gap="3" align="center">
                     <Box>
-                        {icon(accion, data.activo)}
+                        {icon(accion, data)}
                     </Box>
                     <Box>
                         <Text as="div" size="3" weight="bold">

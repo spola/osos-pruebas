@@ -1,5 +1,5 @@
 export enum EstadoOso {
-  None = 'none',
+  Idle = 'idle',
   Moving = 'moving',
   Loading = 'loading',
   Unloading = 'unloading',

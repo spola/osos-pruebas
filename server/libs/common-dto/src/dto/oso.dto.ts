@@ -35,7 +35,7 @@ export class Oso {
   ip: string;
 
   @IsDate()
-  inicio: Date;
+  inicio?: Date;
 
   @Type(() => Accion)
   accion?: Accion;

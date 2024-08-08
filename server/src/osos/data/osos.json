@@ -4,105 +4,105 @@
       "machineId": "1246dc44-6230-4a69-a3b5-ef13814aa924",
       "ip": "119.97.30.159",
       "activo": true,
-      "estado": "none"
+      "estado": "idle"
     },
     {
       "id": 2,
       "machineId": "3eccfd7d-cfb9-4ddb-a640-c771ddfb4934",
       "ip": "255.88.35.186",
       "activo": false,
-      "estado": "none"
+      "estado": "charging"
     },
     {
       "id": 3,
       "machineId": "57468b05-a6a5-40fd-be1d-50cf2f5c375f",
       "ip": "106.84.81.75",
       "activo": false,
-      "estado": "none"
+      "estado": "idle"
     },
     {
       "id": 4,
       "machineId": "905042d0-d398-4826-a262-eae71cda6739",
       "ip": "118.124.246.37",
       "activo": true,
-      "estado": "none"
+      "estado": "idle"
     },
     {
       "id": 5,
       "machineId": "7e97391a-92fd-4875-a105-45776272ffda",
       "ip": "34.136.237.169",
       "activo": false,
-      "estado": "none"
+      "estado": "idle"
     },
     {
       "id": 6,
       "machineId": "5093ed9a-24eb-4d94-b38c-4024b3df3eca",
       "ip": "29.41.245.69",
       "activo": false,
-      "estado": "none"
+      "estado": "idle"
     },
     {
       "id": 7,
       "machineId": "fadea59a-eef5-40c2-9e69-02e58aa788c5",
       "ip": "168.70.121.57",
       "activo": true,
-      "estado": "none"
+      "estado": "idle"
     },
     {
       "id": 8,
       "machineId": "81e67465-ffe3-4dae-b01d-fb7f29239b30",
       "ip": "107.21.71.140",
       "activo": true,
-      "estado": "none"
+      "estado": "idle"
     },
     {
       "id": 9,
       "machineId": "86adf17f-030b-49a6-819b-e43eed066de3",
       "ip": "133.187.105.209",
       "activo": true,
-      "estado": "none"
+      "estado": "idle"
     },
     {
       "id": 10,
       "machineId": "7d183160-ee28-44d5-81ec-303aefe6eaa3",
       "ip": "227.217.252.71",
       "activo": true,
-      "estado": "none"
+      "estado": "idle"
     },
     {
       "id": 11,
       "machineId": "aa8457c4-2d74-40f6-8354-0b10909bb723",
       "ip": "2.97.217.160",
       "activo": true,
-      "estado": "none"
+      "estado": "idle"
     },
     {
       "id": 12,
       "machineId": "6bfacd76-96ed-4a79-ada0-26729123bb0e",
       "ip": "97.170.117.96",
       "activo": true,
-      "estado": "none"
+      "estado": "idle"
     },
     {
       "id": 13,
       "machineId": "fd50fdb9-a859-48c5-a2d2-a4c008b5cee7",
       "ip": "26.135.39.113",
       "activo": false,
-      "estado": "none"
+      "estado": "idle"
     },
     {
       "id": 14,
       "machineId": "ec763c86-e110-4d60-ba78-c957ab1ccc32",
       "ip": "240.136.224.101",
       "activo": true,
-      "estado": "none"
+      "estado": "idle"
     },
     {
       "id": 15,
       "machineId": "be7ad935-7149-470b-a8da-0ab2d9c3446f",
       "ip": "229.222.31.50",
       "activo": true,
-      "estado": "none"
+      "estado": "idle"
     }
   ]
   

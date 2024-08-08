@@ -15,7 +15,7 @@ export class OsosService {
   ) { }
 
   findOsoDesocupado(): Oso | null {
-    return osos.find(v => v.activo && v.estado == EstadoOso.None);
+    return osos.find(v => v.activo && v.estado == EstadoOso.Idle);
   }
 
   public findByMachineId(id: string): Oso | undefined {

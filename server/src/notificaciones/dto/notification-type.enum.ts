@@ -1,5 +1,5 @@
 export enum NotificationType {
-    Movement = "movement",
-    Load = "load",
-    Unload = "unload"
-}
+    Movement = "moving",
+    Load = "loading",
+    Unload = "unloading"
+};

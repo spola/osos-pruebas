@@ -4,7 +4,7 @@ import { UpdateNotificacioneDto } from './dto/update-notificacione.dto';
 import { Notificacion } from './entities/notificacione.entity';
 import { randomUUID } from 'crypto';
 import { OsosService } from 'src/osos/osos.service';
-import { EstadoOso } from '@aaa/common-dto';
+import { EstadoOso, OSO_LIBERADO, OsoLiberadoEvent } from '@aaa/common-dto';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 
 let notificaciones = [];
@@ -39,7 +39,7 @@ export class NotificacionesService {
 
     //TODO Validar que esté el oso y que esté en un estado correcto
 
-    oso.estado = EstadoOso.None;
+    oso.estado = EstadoOso.Idle;
 
     // (3) Puede seguir
     //TODO Validar que pueda seguir. Por ejemplo si tiene un nivel de batería adecuado
@@ -48,9 +48,9 @@ export class NotificacionesService {
     // (5) Notificar liberación
 
     this.logger.debug("Emitiendo el evento");
-    this.eventEmitter.emitAsync("oso.liberado", {
+    this.eventEmitter.emitAsync(OSO_LIBERADO, new OsoLiberadoEvent({
       id: oso.id
-    });
+    }));
 
     return notificacion;
   }

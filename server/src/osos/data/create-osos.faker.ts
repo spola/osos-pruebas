@@ -10,7 +10,7 @@ export function createRandomOso(): Oso {
 
     activo: Math.random() > 0.3,
 
-    estado: EstadoOso.None,
+    estado: EstadoOso.Idle,
 
     inicio: new Date()
   };
