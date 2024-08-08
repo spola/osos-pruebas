@@ -65,10 +65,11 @@ export function GrillaOsos({ socket }) {
             //setMessages((previousMessages) => [...previousMessages, newMessage]);
 
             if(!!osoMessage.accion) {
+                let tiempo = (Math.random() * 45000) + 15000;
                 setTimeout(() => {
                     console.info("Notificar cambio " + osoMessage.oso.id);
                     notificar(osoMessage.oso);
-                }, 5000);
+                }, tiempo);
             }
         });
 

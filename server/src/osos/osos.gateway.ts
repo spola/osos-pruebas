@@ -31,7 +31,8 @@ export class OsosGateway {
 
     if (!!payload.tarea) {
       this.server.emit("accion-asignada", {
-        tarea: payload.tarea
+        tarea: payload.tarea,
+        oso: payload.oso
       });
     }
 

@@ -1,27 +1,20 @@
-import { DataList, Flex, Heading, ScrollArea } from "@radix-ui/themes";
-import { Box, Card, Avatar, Text, Separator, Badge } from "@radix-ui/themes";
+import {  Flex, Heading, ScrollArea } from "@radix-ui/themes";
+import { Box, Card, Text, Badge } from "@radix-ui/themes";
+import { EnterIcon, ExitIcon, CubeIcon, LightningBoltIcon, DoubleArrowRightIcon } from '@radix-ui/react-icons'
+
 
 import { useImmer } from 'use-immer';
 import { useState, useEffect } from "react";
-import { io } from "socket.io-client";
 
-/*
-export class TareaDTO {
-    constructor(attr: Partial<TareaDTO>) {
-        Object.assign(this, attr)
-    }
+const icon = (movimiento) => {
+    console.info("movimiento=" + movimiento);
+    if (movimiento == "loading") return (<><EnterIcon /><CubeIcon /></>);
+    if (movimiento == "unloading") return (<><CubeIcon /><ExitIcon /></>);
+    if (movimiento == "moving") return (<><DoubleArrowRightIcon /></>);
+    if (movimiento == "charging") return (<><LightningBoltIcon /></>);
 
-    codigo: string;
-    estado: EstadoTarea;
-    pln: string;
-    origen: string;
-    destino: string;
-
-    etapa?: number;
+    return (<></>);
 }
-    */
-
-// const socket = io('http://localhost:4000', { autoConnect: false });
 
 const colorAccion = (tarea) => {
     if (tarea.estado == "terminado") return "jade";
@@ -61,19 +54,24 @@ export function Tareas({ socket }) {
 
         socket.on("accion-asignada", (accionMessage) => {
             console.log("New acción asignada", accionMessage);
-            handleTareaUpdated(accionMessage.tarea);
-            //setMessages((previousMessages) => [...previousMessages, newMessage]);
+            handleTareaUpdated({
+                ...accionMessage.tarea,
+                osoId: accionMessage.oso.id,
+                osoMovimiento: accionMessage.oso.accion.movimiento
+            });
         });
         socket.on("tarea-creada", (accionMessage) => {
             console.log("New acción creada", accionMessage);
             handleTareaUpdated(accionMessage.tarea);
-            //setMessages((previousMessages) => [...previousMessages, newMessage]);
         });
 
         socket.on("tarea-terminada", (accionMessage) => {
             console.log("tarea terminada", accionMessage);
-            handleTareaUpdated(accionMessage.tarea);
-            //setMessages((previousMessages) => [...previousMessages, newMessage]);
+            handleTareaUpdated({
+                ...accionMessage.tarea,
+                osoId: null,
+                osoMovimiento: null
+            });
         });
 
         return () => {
@@ -97,12 +95,22 @@ export function Tareas({ socket }) {
                                             {tarea.codigo}
                                         </Badge>
                                     </Text>
-                                    <Text as="div" size="1" color="gray">
-                                        {tarea.origen + "=>" + tarea.destino}
-                                    </Text>
-                                    <Text as="div" size="1" color="bold">
-                                        pln: {tarea.pln}
-                                    </Text>
+                                    {tarea.estado != "terminado" && (
+                                        <>
+                                            <Text as="div" size="1" color="gray">
+                                                {tarea.origen + "=>" + tarea.destino}
+                                            </Text>
+                                            <Text as="div" size="1" color="bold">
+                                                pln: {tarea.pln}
+                                            </Text>
+                                            {!!tarea.osoId && (
+                                                <Text as="div" size="1" color="gray">
+                                                    {icon(tarea.osoMovimiento)}
+                                                        Oso #{tarea.osoId}
+                                                </Text>
+                                            )}
+                                        </>
+                                    )}
                                 </Flex>
 
                             </Card>

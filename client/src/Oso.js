@@ -20,6 +20,24 @@ const icon = (accion, data) => {
     return (<></>);
 }
 
+const colorOso = (oso) => {
+
+    let accion = oso.accion;
+
+    if(!oso.activo) return "gray";
+    if(oso.activo && oso.estado == "idle") return "white";
+
+    if(accion == null) return "";
+
+    let movimiento = accion.movimiento;
+
+    if (movimiento == "loading") return "blue";
+    if (movimiento == "unloading") return "blue";
+    if (movimiento == "moving") return "blue";
+
+    return "";
+}
+
 export function Oso({ data }) {
 
     let accion = data.accion;
@@ -31,8 +49,8 @@ export function Oso({ data }) {
                     <Box>
                         {icon(accion, data)}
                     </Box>
-                    <Box>
-                        <Text as="div" size="3" weight="bold">
+                    <Box >
+                        <Text as="div" size="3" weight="bold" color={colorOso(data)}>
                             Oso # {data.id}
                         </Text>
                         <Text as="div" size="2" color="gray">
