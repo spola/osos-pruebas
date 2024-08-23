@@ -17,7 +17,9 @@ async function bootstrap() {
   // await SwaggerModule.loadPluginMetadata(metadata); // <-- here
 
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
+  SwaggerModule.setup('api', app, document, {
+    jsonDocumentUrl: 'swagger/json',
+  });
   
   app.enableCors();
   app.useGlobalPipes(new ValidationPipe({
