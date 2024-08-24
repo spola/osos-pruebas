@@ -3,7 +3,7 @@ import { CreateNotificacioneDTO } from './dto/create-notificacion.dto';
 import { UpdateNotificacioneDto } from './dto/update-notificacione.dto';
 import { Notificacion } from './entities/notificacione.entity';
 import { randomUUID } from 'crypto';
-import { OsosService } from 'src/osos/osos.service';
+import { OsosService } from '../osos/osos.service';
 import { EstadoOso, OSO_LIBERADO, OsoLiberadoEvent } from '@aaa/common-dto';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 
