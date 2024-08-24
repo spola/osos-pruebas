@@ -1,9 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { NotificationType } from './dto/notification-type.enum';
+import { Notificacion } from './entities/notificacione.entity';
 import { NotificacionesController } from './notificaciones.controller';
 import { NotificacionesService } from './notificaciones.service';
-import { Notificacion } from './entities/notificacione.entity';
-import { NotificationType } from './dto/notification-type.enum';
-import { CreateNotificacioneDTO } from './dto/create-notificacion.dto';
 
 describe('NotificacionesController', () => {
   let controller: NotificacionesController;

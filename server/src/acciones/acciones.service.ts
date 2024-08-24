@@ -1,11 +1,9 @@
+import { Accion, EstadoOso, Oso, TAREA_CREADA, TAREA_TERMINADA, TareaCreadaEvent } from '@aaa/common-dto';
 import { Injectable, Logger } from '@nestjs/common';
+import { EventEmitter2 } from '@nestjs/event-emitter';
 import { Cron, CronExpression } from '@nestjs/schedule';
 import { EstadoTarea, TareaDTO } from '../../libs/common-dto/src/dto/tarea.dto';
 import { createFakeTask } from './data/create-task.fn';
-import { EventEmitter2 } from '@nestjs/event-emitter';
-import { Oso, TAREA_CREADA, TAREA_TERMINADA, TareaCreadaEvent } from '@aaa/common-dto';
-import { Accion } from '@aaa/common-dto';
-import { EstadoOso } from '@aaa/common-dto';
 
 const tareas: TareaDTO[] = [];
 const asignaciones: any = {};
@@ -39,7 +37,7 @@ export class AccionesService {
         let tarea = asignaciones[oso.id];
 
         //Si tiene una tarea asignada, entonces la cambiamos de etapa y evaluamos si se terminó
-        if (!!tarea) {
+        if (tarea) {
             tarea.etapa++;
 
             if (tarea.etapa > 3) {

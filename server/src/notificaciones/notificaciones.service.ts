@@ -1,11 +1,10 @@
+import { EstadoOso, OSO_LIBERADO, OsoLiberadoEvent } from '@aaa/common-dto';
 import { Injectable, Logger } from '@nestjs/common';
-import { CreateNotificacioneDTO } from './dto/create-notificacion.dto';
-import { UpdateNotificacioneDto } from './dto/update-notificacione.dto';
-import { Notificacion } from './entities/notificacione.entity';
+import { EventEmitter2 } from '@nestjs/event-emitter';
 import { randomUUID } from 'crypto';
 import { OsosService } from '../osos/osos.service';
-import { EstadoOso, OSO_LIBERADO, OsoLiberadoEvent } from '@aaa/common-dto';
-import { EventEmitter2 } from '@nestjs/event-emitter';
+import { CreateNotificacioneDTO } from './dto/create-notificacion.dto';
+import { Notificacion } from './entities/notificacione.entity';
 
 let notificaciones = [];
 

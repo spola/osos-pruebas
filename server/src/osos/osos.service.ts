@@ -28,7 +28,7 @@ export class OsosService {
 
   public reservarOso(id: number): Oso | undefined {
     let oso = this.findOso(id);
-    if (!!oso) {
+    if (oso) {
       oso.estado = EstadoOso.Reserved;
     }
 

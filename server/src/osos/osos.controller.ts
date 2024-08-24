@@ -22,7 +22,7 @@ export class OsosController {
   list(): OsoDTO[] {
     return this.service.getAll().map(o => ({
       ...o,
-      horaInicio: !!o.inicio ? formatter.format(o.inicio) : null
+      horaInicio: o.inicio ? formatter.format(o.inicio) : null
     }));
   }
 }
