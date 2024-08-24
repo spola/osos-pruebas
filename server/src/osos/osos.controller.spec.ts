@@ -1,8 +1,7 @@
+import { EstadoOso, Oso } from '@aaa/common-dto';
 import { Test, TestingModule } from '@nestjs/testing';
 import { OsosController } from './osos.controller';
 import { OsosService } from './osos.service';
-import { OsosGateway } from './osos.gateway';
-import { EstadoOso, Oso } from '@aaa/common-dto';
 
 describe('OsosController', () => {
   let controller: OsosController;
