@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { NotificacionesService } from './notificaciones.service';
 import { NotificacionesController } from './notificaciones.controller';
-import { OsosModule } from 'src/osos/osos.module';
+import { OsosModule } from '../osos/osos.module';
 
 @Module({
   imports: [OsosModule],
