@@ -49,5 +49,28 @@ describe('OsosService', () => {
     it('not find a bear', () =>{
       expect(service.findOso(-100)).not.toBeDefined();
     })
-  })
+  });
+
+  describe('should reservarOso', () => {
+    it('reserve a bear', () =>{
+      expect(service.reservarOso(1))
+        .toBeDefined()
+        .toHaveProperty('estado', EstadoOso.Reserved);
+    })
+    it('not reserve a bear', () =>{
+      expect(service.reservarOso(-100)).not.toBeDefined();
+    })
+  });
+
+  it('should getAll', () => {
+    expect(service.getAll())
+      .toBeDefined()
+      .toHaveLength(15);
+  });
+
+  it('should seed', () => {
+    expect(service.seed())
+      .toBeDefined()
+      .toHaveLength(15);
+  });
 });
