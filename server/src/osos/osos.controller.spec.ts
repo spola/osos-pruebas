@@ -35,6 +35,13 @@ describe('OsosController', () => {
     expect(controller.list()).toBeDefined();
   });
 
+  it('should been seed', () => {
+    jest.spyOn(service, "seed").mockReturnValueOnce([]);
+    expect(service.seed()).toStrictEqual([]);
+
+    expect(service.seed).toHaveBeenCalledTimes(1);
+  })
+
   it("should been list the osos", () => {
 
     let osos = [{
@@ -50,14 +57,9 @@ describe('OsosController', () => {
     jest.spyOn(service, 'getAll').mockReturnValue(osos);
 
     expect(controller.list()).toStrictEqual([{
-      activo: true,
-      estado: EstadoOso.Idle,
-      id: 1000,
-      ip: "127.0.0.1",
-      machineId: "asdf-asdf-asdf-adff",
-      accion: null,
-      inicio: new Date(2024, 8, 23, 20, 10, 30, 40),
+      ...osos[0],
       horaInicio: "20:10:30"
     }]);
+    expect(service.getAll).toHaveBeenCalledTimes(1);
   })
 });
