@@ -96,6 +96,9 @@ importers:
       jest:
         specifier: ^29.5.0
         version: 29.7.0(@types/node@20.14.13)(ts-node@10.9.2(@swc/core@1.7.6)(@types/node@20.14.13)(typescript@5.5.4))
+      jest-chain:
+        specifier: ^1.1.6
+        version: 1.1.6
       prettier:
         specifier: ^3.0.0
         version: 3.3.3
@@ -2032,6 +2035,9 @@ packages:
     resolution: {integrity: sha512-2P4SQ0HrLQ+fw6llpLnOaGAvN2Zu6778SJMrCUwns4fOoG9ayrTiZk3VV8sCPkVZF8ab0zksVpS8FDY5pRCNBA==}
     engines: {node: '>=10'}
     hasBin: true
+
+  jest-chain@1.1.6:
+    resolution: {integrity: sha512-eIkGzVBGQ1VuEErDceMYAET53pcwYVVTXtJEbY+x60Dwi+2M2uOt4rhKAej+wfVOAlE4G0plI9mstmv6GBtJjw==}
 
   jest-changed-files@29.7.0:
     resolution: {integrity: sha512-fEArFiwf1BpQ+4bXSprcDc3/x4HSzL4al2tozwVpDFpsxALjLYdyiIK4e5Vz66GQJIbXJ82+35PtysofptNX2w==}
@@ -5569,6 +5575,8 @@ snapshots:
       chalk: 4.1.2
       filelist: 1.0.4
       minimatch: 3.1.2
+
+  jest-chain@1.1.6: {}
 
   jest-changed-files@29.7.0:
     dependencies:
